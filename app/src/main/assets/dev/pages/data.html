@@ -14,11 +14,12 @@
 
 					<h2 class="font-bold text-xl pt-3">{{x.tanggal}}</h2>
 
-					<div v-for='y in x.skor' class="grid grid-cols-6">
-						<div v-for='z in y' class="text-center border border-green-500 text-green-800 py-1 cell">
+					<div v-for='y in x.skor' class="grid grid-cols-7">
+						<div v-for='z in y' class="cell">
 							<span v-if='z == 0'>M</span>
 							<span v-if='z != 0'>{{z}}</span>
 						</div>
+            <div class="cell !bg-green-500 !text-green-100">{{y.reduce((a, b) => +a + +b)}}</div>
 					</div>
 
 				</div>
@@ -35,7 +36,7 @@
 						<span class="bg-orange-100 text-orange-500 cursor-pointer inline-block border border-orange-500 py-1 text-center rounded select-none mr-2 mb-2" v-for='x in pilihan' @click='inputTambah += x + ", "'>
 							<span v-if='x == 0'>M</span>
 							<span v-if='x != 0'>{{x}}</span>
-						</span>
+						</span>  
 					</div>
 					<div class="flex justify-between">
 						<div>&nbsp;</div> 
@@ -115,6 +116,9 @@
 		.logo-tambah {
 			@apply cursor-pointer w-10 h-auto text-green-800
 		}
+    .cell {
+      @apply text-center border border-green-500 text-green-800 py-1
+    }
 		.cell:not(:last-child) {
 			border-right: none;
 		}
