@@ -4,16 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "ssg --watch",
-    "build": "ssg",
-    "windi:dev": "windicss './dev/**/*.html' -to './dev/static/windi.css' --dev --style",
-    "windi:build": "windicss './dev/**/*.html' -mto './dev/static/windi.css' --style"
+    "dev:windi": "windicss './dev/**/*.html' -to './dev/static/windi.css' --dev --style",
+    "dev:ssg": "ssg --watch",
+    "dev": "run-p dev:*",
+    "build:windi": "windicss './dev/**/*.html' -mto './dev/static/windi.css' --style",
+    "build:ssg": "ssg",
+    "build": "run-s build:*"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "mini-ssg-zen": "^0.0.6",
+    "npm-run-all": "^4.1.5",
     "windicss": "^3.2.1"
   }
 }

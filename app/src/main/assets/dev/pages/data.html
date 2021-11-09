@@ -1,0 +1,122 @@
+@layout(default)
+
+@section(judul)
+	Olah Data
+@endsection
+
+@section(body)
+	<div id="data" @mounted='dapatkanSekarang(); ambilData()'>
+
+		<div class="p-3 pb-16">
+			<h1 class="text-center text-3xl font-serif py-4">Jarak {{jarak}} meter</h1>
+			<div v-for='x in data'>
+				<div v-if='x.jarak == jarak'>
+
+					<h2 class="font-bold text-xl pt-3">{{x.tanggal}}</h2>
+
+					<div v-for='y in x.skor' class="grid grid-cols-6">
+						<div v-for='z in y' class="text-center border border-green-500 text-green-800 py-1 cell">
+							<span v-if='z == 0'>M</span>
+							<span v-if='z != 0'>{{z}}</span>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+		<div v-if='menuTambah'>
+			<div class="latar-modal" @click='menuTambah = false'></div>
+			<div class="body-modal">
+				<form class="content-modal" @submit.prevent='dapatkanTambah'>
+					<h1 class="text-center">Hasil</h1>
+					<input type="text" class="my-3 bg-gray-100 p-2 border rounded" v-model='inputTambah' required>
+					<div class="grid grid-cols-4">
+						<span class="bg-orange-100 text-orange-500 cursor-pointer inline-block border border-orange-500 py-1 text-center rounded select-none mr-2 mb-2" v-for='x in pilihan' @click='inputTambah += x + ", "'>
+							<span v-if='x == 0'>M</span>
+							<span v-if='x != 0'>{{x}}</span>
+						</span>
+					</div>
+					<div class="flex justify-between">
+						<div>&nbsp;</div> 
+						<input type="submit" value="Tambahkan" class="bg-green-500 text-white rounded shadow py-1 px-3 cursor-pointer mt-2">
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="bawah" @click='menuTambah = true'>
+			@import(tambah)
+		</div>
+	</div>
+
+	<script>
+		let sekarang = new Date
+		const bulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember']
+		let tanggalSekarang = `${sekarang.getDate()} ${bulan[sekarang.getMonth()]} ${sekarang.getFullYear()}`
+		// console.log(tanggalSekarang)
+
+		PetiteVue.createApp({
+			jarak: '',
+			inputTambah: '',
+			menuTambah: false,
+			pilihan: [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0],
+			data: [],
+			ambilData(){
+				if (localStorage.data) {
+					this.data = JSON.parse(localStorage.data)
+				}
+			},
+			dapatkanSekarang(){
+				this.jarak = new URLSearchParams(location.search).get('jarak')
+			},
+			dapatkanTambah(){
+				let data = this.inputTambah.split(', ').filter(x => x).map(x => +x).sort((a, b) => b - a).slice(0, 6)
+				// console.log(data)
+
+				const terbaru = {
+					tanggal: tanggalSekarang,
+					skor: [data],
+					jarak: this.jarak
+				}
+				// console.log(terbaru)
+
+				if (this.data.length > 0) {
+					let sudahAda = false
+					this.data.forEach(x => {
+						if (x.tanggal == tanggalSekarang && x.jarak == this.jarak) {
+							x.skor = [data, ...x.skor]
+							sudahAda = true
+						}
+					})
+					if (!sudahAda) {
+						this.data = [terbaru, ...this.data]
+					}
+				} else {
+					this.data = [terbaru]
+				}
+
+				this.menuTambah = false
+				this.inputTambah = ''
+
+				// this.data = [terbaru, ...this.data]
+
+				localStorage.data = JSON.stringify(this.data)
+			}
+		}).mount('#data')
+	</script>
+
+	<style lang="windi">
+		#data {
+			@apply min-h-screen bg-green-100
+		}
+		.bawah {
+			@apply fixed bottom-0 right-0 p-3 
+		}
+		.logo-tambah {
+			@apply cursor-pointer w-10 h-auto text-green-800
+		}
+		.cell:not(:last-child) {
+			border-right: none;
+		}
+	</style>
+@endsection
