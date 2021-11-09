@@ -31,9 +31,9 @@
 			<div class="body-modal">
 				<form class="content-modal" @submit.prevent='dapatkanTambah'>
 					<h1 class="text-center">Hasil</h1>
-					<input type="text" class="my-3 bg-gray-100 p-2 border rounded" v-model='inputTambah' required>
-					<div class="grid grid-cols-4">
-						<span class="bg-orange-100 text-orange-500 cursor-pointer inline-block border border-orange-500 py-1 text-center rounded select-none mr-2 mb-2" v-for='x in pilihan' @click='inputTambah += x + ", "'>
+					<input type="text" class="my-3 bg-gray-100 p-2 border rounded w-full" v-model='inputTambah' required>
+					<div class="grid grid-cols-4 gap-2">
+						<span class="bg-orange-100 text-orange-500 cursor-pointer inline-block border border-orange-500 py-1 text-center rounded select-none" v-for='x in pilihan' @click='inputTambah += x + ", "'>
 							<span v-if='x == 0'>M</span>
 							<span v-if='x != 0'>{{x}}</span>
 						</span>  

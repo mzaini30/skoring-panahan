@@ -178,12 +178,6 @@ svg {
   margin-top: 0.75rem;
   margin-bottom: 0.75rem;
 }
-.mr-2 {
-  margin-right: 0.5rem;
-}
-.mb-2 {
-  margin-bottom: 0.5rem;
-}
 .mt-2 {
   margin-top: 0.5rem;
 }
@@ -260,6 +254,10 @@ svg {
 }
 .w-full {
   width: 100%;
+}
+.gap-2 {
+  grid-gap: 0.5rem;
+  gap: 0.5rem;
 }
 .grid-cols-7 {
   grid-template-columns: repeat(7, minmax(0, 1fr));
