@@ -28,6 +28,10 @@
 						</div>
             <div class="cell !bg-green-500 !text-green-100">{{y.reduce((a, b) => +a + +b)}}</div>
 					</div>
+					<div class="grid grid-cols-7">
+						<div class="cell col-span-6">Jumlah</div>
+						<div class="cell !bg-blue-500 !text-blue-100">{{ x.skor.flat().reduce((a, b) => a + b) }}</div>
+					</div>
 
 				</div>
 			</div>
