@@ -1,0 +1,21 @@
+{
+  "0 debug pnpm:scope": {
+    "selected": 1
+  },
+  "1 error pnpm": {
+    "code": "ELIFECYCLE",
+    "errno": "ENOENT",
+    "syscall": "spawn",
+    "file": "sh",
+    "pkgid": "assets@1.0.0",
+    "stage": "dev",
+    "script": "run-p dev:*",
+    "pkgname": "assets",
+    "err": {
+      "name": "pnpm",
+      "message": "assets@1.0.0 dev: `run-p dev:*`\nspawn ENOENT",
+      "code": "ELIFECYCLE",
+      "stack": "pnpm: assets@1.0.0 dev: `run-p dev:*`\nspawn ENOENT\n    at ChildProcess.<anonymous> (/home/zen/Unduhan/node-v16.13.0-linux-x64/pnpm-global/5/node_modules/.pnpm/pnpm@6.20.4/node_modules/pnpm/dist/pnpm.cjs:91250:22)\n    at ChildProcess.emit (node:events:390:28)\n    at maybeClose (node:internal/child_process:1064:16)\n    at Process.ChildProcess._handle.onexit (node:internal/child_process:301:5)"
+    }
+  }
+}

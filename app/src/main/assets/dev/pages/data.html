@@ -8,11 +8,18 @@
 	<div id="data" @mounted='dapatkanSekarang(); ambilData()'>
 
 		<div class="p-3 pb-16">
-			<h1 class="text-center text-3xl font-serif py-4">Jarak {{jarak}} meter</h1>
+			<h1 class="text-center text-3xl font-serif pt-4">Jarak {{jarak}} meter</h1>
 			<div v-for='x in data'>
 				<div v-if='x.jarak == jarak'>
 
-					<h2 class="font-bold text-xl pt-3">{{x.tanggal}}</h2>
+					<h2 class="text-sm pt-7">{{x.tanggal}}</h2>
+					<p class="text-xl text-violet-500 font-bold">Akurasi {{
+						Math.ceil(
+							x.skor.flat().reduce(function (a, b, c){
+								return a + (b - a) / (c + 1)
+							}) * 10
+						)
+					}}%</p>
 
 					<div v-for='y in x.skor' class="grid grid-cols-7">
 						<div v-for='z in y' class="cell">
