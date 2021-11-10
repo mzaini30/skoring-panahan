@@ -79,7 +79,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="$PROJECT_DIR$/tambahan/ic_launcher_foreground.png" />
+                                                <entry key="imagePath" value="$PROJECT_DIR$/tambahan/icon.svg.png" />
                                               </map>
                                             </option>
                                           </PersistentState>

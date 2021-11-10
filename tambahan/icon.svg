@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   sodipodi:docname="icon.svg"
+   inkscape:export-filename="/home/zen/aplikasi android/skoring panahan/tambahan/icon.svg.png"
+   inkscape:export-xdpi="163.28999"
+   inkscape:export-ydpi="163.28999">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.83382353"
+     inkscape:cx="-244.09171"
+     inkscape:cy="734.28571"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1366"
+     inkscape:window-height="712"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       id="rect3715"
+       width="140"
+       height="140"
+       x="-70"
+       y="34.535999"
+       style="fill:#86efac;stroke-width:0.29220551;fill-opacity:1"
+       transform="scale(-1,1)" />
+    <g
+       id="g3740"
+       transform="matrix(2.6113976,0,0,2.6113976,-60.175036,37.505281)"
+       style="clip-rule:evenodd;fill:#166534;fill-rule:evenodd;fill-opacity:1">
+      <path
+         id="path3736"
+         d="m 41.072,5.994 -37.76,10.526 9.074,9.294 8.414,0.146 9.683,-9.44 c -0.256,-0.525 -0.384,-0.964 -0.384,-1.318 0,-0.794 0.312,-1.422 0.796,-1.868 0.83,-0.763 1.828,-0.877 2.994,-0.342 l 7.183,-6.997 z"
+         inkscape:connector-curvature="0"
+         style="fill:#166534;fill-opacity:1" />
+      <path
+         id="path3738"
+         d="M 42.103,6.728 31.578,44.49 22.284,35.415 22.138,27 31.512,17.482 a 2.542,2.542 0 0 0 1.665,0.495 c 0.902,-0.05 1.485,-0.596 1.759,-0.917 a 2.35,2.35 0 0 0 0.567,-1.649 2.566,2.566 0 0 0 -0.521,-1.464 l 7.12,-7.219 z"
+         inkscape:connector-curvature="0"
+         style="fill:#166534;fill-opacity:1" />
+    </g>
+  </g>
+</svg>
