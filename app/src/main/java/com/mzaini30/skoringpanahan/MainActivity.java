@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         // my banner ad id: ca-app-pub-2878374163061282/6615438108
         // change to your own ad id
         // Change in MainActivity.java and activity_main.xml
-        MobileAds.initialize(this, "ca-app-pub-3940256099942544/6300978111");
+        MobileAds.initialize(this, "ca-app-pub-9804745932553029/6535009879");
         mAdView = (AdView)findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
