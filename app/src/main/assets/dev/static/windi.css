@@ -317,6 +317,42 @@ svg {
 .cell:not(:last-child) {
   border-right: none;
 }
+.body-index {
+  background-image: -o-linear-gradient(top, var(--tw-gradient-stops));
+  background-image: -webkit-gradient(linear, left top, left bottom, from(var(--tw-gradient-stops)));
+  background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
+  --tw-gradient-from: rgba(139, 92, 246, var(--tw-from-opacity, 1));
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(255, 255, 255, 0));
+  --tw-gradient-to: rgba(16, 185, 129, var(--tw-to-opacity, 1));
+  min-height: 100vh;
+  padding-top: 2.25rem;
+  padding-bottom: 2.25rem;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  --tw-text-opacity: 1;
+  color: rgba(255, 255, 255, var(--tw-text-opacity));
+  width: 100%;
+}
+.body-index h1 {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  padding-bottom: 2.5rem;
+  text-align: center;
+}
+.body-index a {
+  border-width: 1px;
+  border-width: 5px;
+  display: block;
+  font-weight: 700;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  padding: 1.25rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+.body-index a:nth-child(2) {
+  margin-bottom: 1.75rem;
+}
 .list {
   --tw-bg-opacity: 1;
   background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
@@ -357,4 +393,17 @@ input:focus {
   top: 0px;
   left: 0px;
   width: 100%;
+}
+.turnamen {
+  font-family: ui-serif,Georgia,Cambria,"Times New Roman",Times,serif;
+  padding: 2rem;
+}
+.turnamen h1 {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+[v-cloak] {
+  display: none;
 }

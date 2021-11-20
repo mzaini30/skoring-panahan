@@ -1,0 +1,72 @@
+@layout(default)
+
+@section(judul)
+	Skoring Panahan
+@endsection
+
+@section(body)
+	<div id="jarak" v-cloak v-on:mounted='mounted'> 
+		<div class="p-6">
+			<h1 class="text-center mb-6 font-serif text-2xl">Latihan</h1>
+
+			<a :href="'data.html?jarak=' + x" v-for='x in jaraknya.sort((a, b) => a - b).reverse()' class="list">{{x}} meter</a>	
+			<a href="" class="list tambah-jarak !bg-green-500 text-white" @click.prevent='menuTambah = true'>Tambahkan Jarak</a>
+		</div>
+
+		<div v-if='menuTambah'>
+			<div class="latar-modal" @click='menuTambah = false'></div>
+			<div class="body-modal">
+				<form action="" @submit.prevent='tambahJarak' class="content-modal">
+					<div class="mb-3">Masukkan Jarak (dalam meter)</div>
+					<input type="tel" v-model='inputJarak' class="mb-3 border w-full p-2 border-blue-300" required>
+					<input type="submit" value="Tambahkan" class="bg-green-500 text-white py-1 px-3 cursor-pointer">
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		PetiteVue.createApp({
+			jaraknya: [],
+			inputJarak: '',
+			menuTambah: false,
+			mounted(){
+				if (localStorage.jarak) {
+					this.jaraknya = JSON.parse(localStorage.jarak)
+				}
+			},
+			tambahJarak(){
+				this.jaraknya = [...this.jaraknya, this.inputJarak]
+				this.menuTambah = false
+				this.inputJarak = ''
+				this.jaraknya = [...new Set(this.jaraknya)]
+				localStorage.jarak = JSON.stringify(this.jaraknya)
+			}
+		}).mount('#jarak')
+	</script>
+
+	<style lang="windi">
+		.list {
+			@apply p-3 block border mb-2 rounded shadow bg-white
+		}
+		input {
+			@apply focus:outline-none;
+		}
+		#jarak {
+			@apply bg-green-100 min-h-screen
+		}
+		.tambah-jarak {
+			@apply text-center
+		}
+
+		.latar-modal {
+			@apply w-full h-screen bg-gray-800/50 cursor-pointer fixed top-0 left-0
+		}
+		.body-modal {
+			@apply fixed top-0 left-0 w-full
+		}
+		.content-modal {
+			@apply bg-white my-10 w-[80%] mx-auto p-4
+		}
+	</style>
+@endsection

@@ -5,7 +5,7 @@
 @endsection
 
 @section(body)
-	<div id="data" @mounted='dapatkanSekarang(); ambilData()'>
+	<div v-cloak id="data" @mounted='dapatkanSekarang(); ambilData()'>
 
 		<div class="p-3 pb-16">
 			<h1 class="text-center text-3xl font-serif pt-4">Jarak {{jarak}} meter</h1>
