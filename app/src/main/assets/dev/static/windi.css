@@ -56,6 +56,21 @@ body {
   font-family: inherit;
   line-height: inherit;
 }
+button {
+  text-transform: none;
+  background-color: transparent;
+  background-image: none;
+}
+button, [type='button'], [type='reset'], [type='submit'] {
+  -webkit-appearance: button;
+}
+button:focus {
+  outline: 1px dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+}
+button, [role="button"] {
+  cursor: pointer;
+}
 html {
   -webkit-text-size-adjust: 100%;
   font-family: ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
@@ -104,6 +119,15 @@ input:-ms-input-placeholder {
 input::-ms-input-placeholder {
   opacity: 1;
   color: #9ca3af;
+}
+input, button {
+  font-family: inherit;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
+  padding: 0;
+  line-height: inherit;
+  color: inherit;
 }
 svg {
   display: block;
@@ -217,6 +241,10 @@ svg {
   padding-left: 0.75rem;
   padding-right: 0.75rem;
 }
+.py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
 .pb-16 {
   padding-bottom: 4rem;
 }
@@ -225,6 +253,9 @@ svg {
 }
 .pt-7 {
   padding-top: 1.75rem;
+}
+.pb-5 {
+  padding-bottom: 1.25rem;
 }
 .shadow {
   --tw-shadow-color: 0, 0, 0;
@@ -443,6 +474,72 @@ input:focus {
   --tw-text-opacity: 1;
   color: rgba(255, 255, 255, var(--tw-text-opacity));
 }
+.tambahkan-skor {
+  --tw-border-opacity: 1;
+  border-color: rgba(0, 0, 0, var(--tw-border-opacity));
+  border-width: 1px;
+  border-width: 2px;
+  display: block;
+  font-weight: 700;
+  margin: 1.25rem;
+  padding: 0.75rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+.skor-turnamen {
+  font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+}
+.skor-turnamen h1 {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  padding: 0.75rem;
+  text-align: center;
+}
+.isi-data-turnamen {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+.isi-data-turnamen [type=text] {
+  --tw-bg-opacity: 1;
+  background-color: rgba(209, 213, 219, var(--tw-bg-opacity));
+}
+.tombol-skor {
+  --tw-bg-opacity: 1;
+  background-color: rgba(255, 237, 213, var(--tw-bg-opacity));
+  --tw-border-opacity: 1;
+  border-color: rgba(249, 115, 22, var(--tw-border-opacity));
+  border-radius: 0.25rem;
+  border-width: 1px;
+  cursor: pointer;
+  display: inline-block;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  text-align: center;
+  --tw-text-opacity: 1;
+  color: rgba(249, 115, 22, var(--tw-text-opacity));
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.skor-turnamen button {
+  --tw-bg-opacity: 1;
+  background-color: rgba(124, 58, 237, var(--tw-bg-opacity));
+  display: block;
+  margin: 0.75rem;
+  margin-top: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  --tw-text-opacity: 1;
+  color: rgba(255, 255, 255, var(--tw-text-opacity));
+  width: -webkit-min-content;
+  width: -moz-min-content;
+  width: min-content;
+}
 .turnamen {
   font-family: ui-serif,Georgia,Cambria,"Times New Roman",Times,serif;
 }
@@ -496,4 +593,8 @@ input:focus {
 }
 [v-cloak] {
   display: none;
+}
+*:focus {
+  outline: 2px solid transparent !important;
+  outline-offset: 2px !important;
 }

@@ -5,27 +5,100 @@
 @endsection
 
 @section(body)
-	<div class="olah-turnamen" v-cloak @mounted='ambilJudul(); ambilPemain()'>
+	<div class="olah-turnamen" v-cloak @mounted='ambilJudul(); ambilPemain(); ambilListnya(); terimaListnya()'>
 		<h1>{{judul}}</h1>
 
-		<form class="anggota-baru-turnamen">
+		{{listnya}}
+
+		<form @submit.prevent='tambahkanPemain' class="anggota-baru-turnamen">
 			<p>Anggota Baru</p>
-			<input type="text">
+			<input v-model='baru' type="text">
 		</form>
 
 		<div class="anggota-turnamen">
 			<p v-for='x in pemain'>{{x}}</p>
 		</div>
+
+		<a :href="'tambah-data-turnamen.html?judul=' + judul" class="tambahkan-skor">Tambahkan Skor &rarr;</a>
+
+		<!-- listnya -->
 	</div>
 
 	<script>
 		const judul = new URLSearchParams(location.search).get('judul')
+		console.log(localStorage[`tambahkan_${slug(judul)}`])
 
 		PetiteVue.createApp({
 			judul: '',
 			pemain: [], 
+			listnya: [],
+			baru: '',
 			ambilJudul(){
 				this.judul = judul
+			},
+			terimaListnya(){
+				if (localStorage[`tambahkan_${slug(judul)}`]) {
+
+					const dataBaru = JSON.parse(localStorage[`tambahkan_${slug(judul)}`])
+					
+					for (let x of dataBaru){
+						const skornya = x.skor.split(', ').filter(x => x).map(x => +x).sort((a, b) => b - a).slice(0, 6)
+						const total = skornya.reduce((a, b) => a + b)
+
+						const listnyaTersimpan = localStorage[`listnya_${slug(judul)}`]
+
+						console.log(x)
+						console.log(skornya)
+						console.log(total) 
+
+						console.log(listnyaTersimpan)
+						console.log(listnyaTersimpan.includes(`"nama":"${x.nama}"`)) // cek apakah nama sudah ada di "listnyaTersimpan"
+
+						if (listnyaTersimpan.includes(`"nama":"${x.nama}"`)) {
+							// kalau nama ada di listnyaTersimpan
+						} else {
+
+						}
+					}
+
+					// salah
+					if (this.listnya.length < 1) {
+						console.log('Masih kosongan')
+						for (let x of dataBaru){
+							const skornya = x.skor.split(', ').filter(x => x).map(x => +x).sort((a, b) => b - a).slice(0, 6)
+							const total = skornya.reduce((a, b) => a + b)
+							this.listnya = [...this.listnya, {
+								nama: x.nama,
+								skor: [
+									[...skornya] 
+								],
+								total
+							}]
+						}
+					} else {
+						// kalau sudah ada "listnya"
+					}
+					// /salah
+
+					localStorage[`listnya_${slug(judul)}`] = JSON.stringify(this.listnya)
+					// localStorage.removeItem(`tambahkan_${slug(judul)}`)
+
+				}
+			},
+			ambilListnya(){
+				if (localStorage[`listnya_${slug(judul)}`]) {
+					this.listnya = JSON.parse(localStorage[`listnya_${slug(judul)}`])
+				}
+			},
+			tambahkanPemain(){
+				if (this.pemain.includes(this.baru)) {
+					this.baru = ''
+				} else {
+					this.pemain = [this.baru, ...this.pemain].sort()
+					localStorage[`pemain_${slug(judul)}`] = JSON.stringify(this.pemain)
+
+					this.baru = ''
+				}
 			},
 			ambilPemain(){
 				if (localStorage[`pemain_${slug(judul)}`]) {
@@ -55,6 +128,10 @@
 		}
 		.anggota-baru-turnamen p {
 			@apply text-white
+		}
+
+		.tambahkan-skor {
+			@apply uppercase font-bold border border-black border-2 p-3 block m-5 text-center
 		}
 	</style>
 @endsection

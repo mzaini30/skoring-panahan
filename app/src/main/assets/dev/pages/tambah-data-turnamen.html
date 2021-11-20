@@ -1,0 +1,76 @@
+@layout(default)
+
+@section(judul)
+	Tambah Data Turnamen
+@endsection
+
+@section(body)
+	<div class="skor-turnamen" @mounted='ambilPemain' v-cloak>
+		<h1>Skor Baru</h1>
+
+		<div class="isi-data-turnamen">
+			<div v-for='x in pemain'>
+				<p>{{x.nama}}</p>
+				<input v-model='x.skor' type="text">
+				<div class="grid grid-cols-4 gap-2 py-2 pb-5">
+					<div class="tombol-skor" v-for='y in pilihan' @click='x.skor += y + ", "'>
+						<span v-if='y == 0'>M</span>
+						<span v-if='y != 0'>{{y}}</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<button @click='tambahkan'>Tambah</button>
+	</div>
+
+	<style lang="windi">
+		.skor-turnamen {
+			@apply font-mono
+		}
+		.skor-turnamen h1 {
+			@apply p-3 text-center text-2xl
+		}
+
+		.isi-data-turnamen {
+			@apply px-3
+		}
+		.isi-data-turnamen [type=text] {
+			@apply bg-gray-300
+		}
+
+		.tombol-skor {
+			@apply bg-orange-100 text-orange-500 cursor-pointer inline-block border border-orange-500 py-1 text-center rounded select-none
+		}
+
+		.skor-turnamen button {
+			@apply bg-violet-600 text-white py-1 px-4 block m-3 mt-0 w-min mx-auto
+		}
+	</style>
+
+	<script>
+		const judul = new URLSearchParams(location.search).get('judul')
+
+		PetiteVue.createApp({
+			pemain: [],
+			pilihan: [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0],
+			tambahkan(){
+				localStorage[`tambahkan_${slug(judul)}`] = JSON.stringify(this.pemain)
+				history.back()
+			},
+			ambilPemain(){
+				if (localStorage[`pemain_${slug(judul)}`]) {
+					const pemain = JSON.parse(localStorage[`pemain_${slug(judul)}`]) 
+
+					for (let x of pemain){
+						this.pemain = [...this.pemain, {
+							nama: x,
+							skor: ''
+						}]
+					}
+
+				}
+			}
+		}).mount('.skor-turnamen')
+	</script>
+@endsection
