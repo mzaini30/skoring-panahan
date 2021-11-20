@@ -47,40 +47,40 @@
 
 						const listnyaTersimpan = localStorage[`listnya_${slug(judul)}`]
 
-						console.log(x)
 						console.log(skornya)
-						console.log(total) 
 
-						console.log(listnyaTersimpan)
-						console.log(listnyaTersimpan.includes(`"nama":"${x.nama}"`)) // cek apakah nama sudah ada di "listnyaTersimpan"
-
-						if (listnyaTersimpan.includes(`"nama":"${x.nama}"`)) {
+						if (listnyaTersimpan && listnyaTersimpan.includes(`"nama":"${x.nama}"`)) {
 							// kalau nama ada di listnyaTersimpan
+							for (let y of this.listnya){
+								if (y.nama == x.nama){
+									y.skor = [...y.skor, ...skornya]
+								}
+							}
 						} else {
 
 						}
 					}
 
 					// salah
-					if (this.listnya.length < 1) {
-						console.log('Masih kosongan')
-						for (let x of dataBaru){
-							const skornya = x.skor.split(', ').filter(x => x).map(x => +x).sort((a, b) => b - a).slice(0, 6)
-							const total = skornya.reduce((a, b) => a + b)
-							this.listnya = [...this.listnya, {
-								nama: x.nama,
-								skor: [
-									[...skornya] 
-								],
-								total
-							}]
-						}
-					} else {
-						// kalau sudah ada "listnya"
-					}
+					// if (this.listnya.length < 1) {
+					// 	console.log('Masih kosongan')
+					// 	for (let x of dataBaru){
+					// 		const skornya = x.skor.split(', ').filter(x => x).map(x => +x).sort((a, b) => b - a).slice(0, 6)
+					// 		const total = skornya.reduce((a, b) => a + b)
+					// 		this.listnya = [...this.listnya, {
+					// 			nama: x.nama,
+					// 			skor: [
+					// 				[...skornya] 
+					// 			],
+					// 			total
+					// 		}]
+					// 	}
+					// } else {
+					// 	// kalau sudah ada "listnya"
+					// }
 					// /salah
 
-					localStorage[`listnya_${slug(judul)}`] = JSON.stringify(this.listnya)
+					// localStorage[`listnya_${slug(judul)}`] = JSON.stringify(this.listnya)
 					// localStorage.removeItem(`tambahkan_${slug(judul)}`)
 
 				}
