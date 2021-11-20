@@ -73,6 +73,9 @@ h1 {
   font-size: inherit;
   font-weight: inherit;
 }
+h1, p {
+  margin: 0;
+}
 input {
   font-family: inherit;
   font-size: 100%;
@@ -394,15 +397,102 @@ input:focus {
   left: 0px;
   width: 100%;
 }
+.olah-turnamen {
+  font-family: ui-serif,Georgia,Cambria,"Times New Roman",Times,serif;
+}
+.olah-turnamen h1 {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+.anggota-turnamen {
+  --tw-border-opacity: 1;
+  border-bottom-color: rgba(0, 0, 0, var(--tw-border-opacity));
+  border-width: 1px;
+  padding: 0.75rem;
+  padding-bottom: 0.25rem;
+}
+.anggota-turnamen p {
+  --tw-border-opacity: 1;
+  border-color: rgba(0, 0, 0, var(--tw-border-opacity));
+  border-radius: 0.125rem;
+  border-width: 1px;
+  display: inline-block;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+.anggota-turnamen p:last-child {
+  margin-right: 0px;
+}
+.anggota-baru-turnamen {
+  --tw-bg-opacity: 1;
+  background-color: rgba(0, 0, 0, var(--tw-bg-opacity));
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+.anggota-baru-turnamen p {
+  --tw-text-opacity: 1;
+  color: rgba(255, 255, 255, var(--tw-text-opacity));
+}
 .turnamen {
   font-family: ui-serif,Georgia,Cambria,"Times New Roman",Times,serif;
-  padding: 2rem;
 }
 .turnamen h1 {
   font-size: 1.5rem;
   line-height: 2rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
   text-align: center;
   text-transform: uppercase;
+}
+.form-tambah {
+  --tw-bg-opacity: 1;
+  background-color: rgba(0, 0, 0, var(--tw-bg-opacity));
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+.form-tambah p {
+  --tw-text-opacity: 1;
+  color: rgba(255, 255, 255, var(--tw-text-opacity));
+}
+.listnya {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+.listnya a {
+  --tw-border-opacity: 1;
+  border-color: rgba(0, 0, 0, var(--tw-border-opacity));
+  border-bottom-color: transparent;
+  border-width: 1px;
+  display: block;
+  padding: 0.5rem;
+}
+.listnya a:last-child {
+  --tw-border-opacity: 1;
+  border-bottom-color: rgba(0, 0, 0, var(--tw-border-opacity));
+}
+[type=text] {
+  --tw-border-opacity: 1;
+  border-color: rgba(255, 255, 255, var(--tw-border-opacity));
+  border-width: 1px;
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+  width: 100%;
 }
 [v-cloak] {
   display: none;

@@ -5,16 +5,65 @@
 @endsection
 
 @section(body)
-	<div class="turnamen">
+	<div class="turnamen" v-cloak @mounted='ambil'>
 		<h1>Turnamen</h1>
+
+		<form action="" @submit.prevent='tambahkan' class="form-tambah">
+			<p>Tambahkan Turnamen</p>
+			<input type="text" v-model='baru' required>
+		</form>
+
+		<div class="listnya">
+			<a :href="'olah-turnamen.html?judul=' + x" v-for='x in data'>{{x}}</a> 
+		</div>
 	</div>
 
 	<style lang="windi">
 		.turnamen {
-			@apply font-serif p-8
+			@apply font-serif
 		}
 		.turnamen h1 {
-			@apply text-center text-2xl uppercase
+			@apply text-center text-2xl uppercase px-3 py-5
+		}
+
+		.form-tambah {
+			@apply bg-black px-8 py-3
+		}
+		.form-tambah p {
+			@apply text-white
+		}
+
+		.listnya {
+			@apply py-3 px-8
+		}
+		.listnya a {
+			@apply p-2 border block border-black border-b-transparent last:border-b-black 
+		}
+
+		[type=text] {
+			@apply w-full border border-white px-1
 		}
 	</style>
+
+	<script>
+		PetiteVue.createApp({
+			data: [],
+			baru: '',
+			ambil(){
+				if (localStorage.dataTurnamen) {
+					this.data = JSON.parse(localStorage.dataTurnamen)
+				}
+			},
+			tambahkan(){
+				if (this.data.includes(this.baru)) {
+					this.baru = ''
+				} else {
+					this.data = [this.baru, ...this.data]
+					localStorage.dataTurnamen = JSON.stringify(this.data)
+
+					this.baru = '' 
+				}
+			}
+		}).mount('.turnamen')
+	</script>
 @endsection

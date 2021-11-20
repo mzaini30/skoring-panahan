@@ -1,0 +1,60 @@
+@layout(default)
+
+@section(judul)
+	Olah Turnamen
+@endsection
+
+@section(body)
+	<div class="olah-turnamen" v-cloak @mounted='ambilJudul(); ambilPemain()'>
+		<h1>{{judul}}</h1>
+
+		<form class="anggota-baru-turnamen">
+			<p>Anggota Baru</p>
+			<input type="text">
+		</form>
+
+		<div class="anggota-turnamen">
+			<p v-for='x in pemain'>{{x}}</p>
+		</div>
+	</div>
+
+	<script>
+		const judul = new URLSearchParams(location.search).get('judul')
+
+		PetiteVue.createApp({
+			judul: '',
+			pemain: [], 
+			ambilJudul(){
+				this.judul = judul
+			},
+			ambilPemain(){
+				if (localStorage[`pemain_${slug(judul)}`]) {
+					this.pemain = JSON.parse(localStorage[`pemain_${slug(judul)}`])
+				}
+			}
+		}).mount('.olah-turnamen')
+	</script>
+
+	<style lang="windi">
+		.olah-turnamen {
+			@apply font-serif
+		}
+		.olah-turnamen h1 {
+			@apply px-3 text-center py-5 uppercase text-2xl
+		}
+
+		.anggota-turnamen {
+			@apply p-3 border-b-black border pb-1
+		}
+		.anggota-turnamen p {
+			@apply border border-black rounded-sm inline-block px-3 mr-2 mb-2 last:mr-0
+		}
+
+		.anggota-baru-turnamen {
+			@apply bg-black px-3 py-4
+		}
+		.anggota-baru-turnamen p {
+			@apply text-white
+		}
+	</style>
+@endsection
