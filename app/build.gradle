@@ -6,8 +6,8 @@ android {
         applicationId "com.mzaini30.skoringpanahan"
         minSdkVersion 15
         targetSdkVersion 30
-        versionCode 3
-        versionName "3"
+        versionCode 4
+        versionName "4"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

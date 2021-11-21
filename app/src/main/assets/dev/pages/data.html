@@ -12,7 +12,10 @@
 			<div v-for='x in data'>
 				<div v-if='x.jarak == jarak'>
 
-					<h2 class="text-sm pt-7">{{x.tanggal}}</h2>
+					<h2 class="text-sm pt-7">
+						{{x.tanggal}}
+						<span class="cursor-pointer text-red-500" @click='hapus(x.tanggal)'>(hapus)</span> 
+					</h2>
 					<p class="text-xl text-violet-500 font-bold">Akurasi {{
 						Math.ceil(
 							x.skor.flat().reduce(function (a, b, c){
@@ -56,6 +59,9 @@
 				</form>
 			</div>
 		</div>
+
+		<p @click='hapusSemua' class="hapus hapus-di-data">Hapus Semua</p>
+
 		<div class="bawah" @click='menuTambah = true'>
 			@import(tambah)
 		</div>
@@ -65,7 +71,8 @@
 		let sekarang = new Date
 		const bulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember']
 		let tanggalSekarang = `${sekarang.getDate()} ${bulan[sekarang.getMonth()]} ${sekarang.getFullYear()}`
-		// console.log(tanggalSekarang)
+
+		const jarak = new URLSearchParams(location.search).get('jarak')
 
 		PetiteVue.createApp({
 			jarak: '',
@@ -79,7 +86,35 @@
 				}
 			},
 			dapatkanSekarang(){
-				this.jarak = new URLSearchParams(location.search).get('jarak')
+				this.jarak = jarak
+			},
+			hapus(tanggal){
+				Swal.fire('Hapus?', `Tanggal ${tanggal}`).then(x => {
+					if (x.isConfirmed) {
+						let datanya = JSON.parse(localStorage.data)
+
+						datanya = datanya.filter(y => y.jarak == jarak && y.tanggal != tanggal)
+
+						this.data = datanya
+						localStorage.data = JSON.stringify(datanya)	
+					}
+				})
+			},
+			hapusSemua(){
+				Swal.fire('Hapus Semua?').then(x => {
+					if (x.isConfirmed) {
+						let datanya = JSON.parse(localStorage.data)
+						// console.log(datanya)
+						datanya = datanya.filter(y => y.jarak != jarak)
+						// console.log(datanya)
+						localStorage.data = JSON.stringify(datanya)
+
+						let semuaJarak = JSON.parse(localStorage.jarak)
+						semuaJarak = semuaJarak.filter(y => y != jarak)
+						localStorage.jarak = JSON.stringify(semuaJarak) 
+						history.back()
+					}
+				})
 			},
 			dapatkanTambah(){
 				let data = this.inputTambah.split(', ').filter(x => x).map(x => +x).sort((a, b) => b - a).slice(0, 6)
@@ -132,6 +167,9 @@
     }
 		.cell:not(:last-child) {
 			border-right: none;
+		}
+		.hapus-di-data {
+			@apply pt-0 -mt-15 pb-5
 		}
 	</style>
 @endsection

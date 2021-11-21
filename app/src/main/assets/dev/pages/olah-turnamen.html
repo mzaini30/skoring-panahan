@@ -8,10 +8,8 @@
 	<div class="olah-turnamen" v-cloak @mounted='ambilJudul(); ambilPemain(); ambilListnya(); terimaListnya()'>
 		<h1>{{judul}}</h1>
 
-		{{listnya}}
-
 		<form @submit.prevent='tambahkanPemain' class="anggota-baru-turnamen">
-			<p>Anggota Baru</p>
+			<p>Tambahkan Peserta</p>
 			<input v-model='baru' type="text">
 		</form>
 
@@ -22,11 +20,46 @@
 		<a :href="'tambah-data-turnamen.html?judul=' + judul" class="tambahkan-skor">Tambahkan Skor &rarr;</a>
 
 		<!-- listnya -->
+		<div class="tampilkan-listnya">
+			<div v-for='x in listnya.sort((a, b) => b.total - a.total)'>
+				<h2 class="pt-5">
+					<span class="uppercase">{{x.nama}}</span>
+					<span class="font-mono">(Akurasi {{
+						Math.ceil(
+							x.skor.flat().reduce(function (a, b, c){
+								return a + (b - a) / (c + 1)
+							}) * 10
+						)
+					}}%)</span> 
+				</h2> 
+
+				<div v-for='y in x.skor' class="grid grid-cols-7">
+					<div v-for='z in y' class="cell">
+						<span v-if='z == 0'>M</span>
+						<span v-if='z != 0'>{{z}}</span>
+					</div>
+          <div class="cell !bg-green-500 !text-green-100">{{y.length > 0 ? y.reduce((a, b) => +a + +b) : 0}}</div>
+				</div>
+
+				<div class="grid grid-cols-7">
+					<div class="cell col-span-6">Jumlah</div>
+					<div class="cell !bg-blue-500 !text-blue-100">{{ x.total }}</div> 
+				</div>
+
+			</div>
+
+			<p class="hapus" @click='hapusTurnamen'>Hapus Turnamen</p>
+			<!-- 
+			yang dihapus:
+			localStorage.listnya_100_meter
+			localStorage.dataTurnamen -> '["5 meter 2021/11/20","5 meter bersama","100 meter lagi","30 meter baru","100 meter","main bola","kucing"]'
+			 -->
+
+		</div>
 	</div>
 
 	<script>
 		const judul = new URLSearchParams(location.search).get('judul')
-		console.log(localStorage[`tambahkan_${slug(judul)}`])
 
 		PetiteVue.createApp({
 			judul: '',
@@ -43,46 +76,31 @@
 					
 					for (let x of dataBaru){
 						const skornya = x.skor.split(', ').filter(x => x).map(x => +x).sort((a, b) => b - a).slice(0, 6)
-						const total = skornya.reduce((a, b) => a + b)
+						const total = skornya.length > 0 ? skornya.reduce((a, b) => a + b) : 0
 
 						const listnyaTersimpan = localStorage[`listnya_${slug(judul)}`]
-
-						console.log(skornya)
 
 						if (listnyaTersimpan && listnyaTersimpan.includes(`"nama":"${x.nama}"`)) {
 							// kalau nama ada di listnyaTersimpan
 							for (let y of this.listnya){
 								if (y.nama == x.nama){
-									y.skor = [...y.skor, ...skornya]
+									y.skor = [...y.skor, [...skornya]]
+									y.total += total
 								}
 							}
 						} else {
-
+							this.listnya = [...this.listnya, {
+								nama: x.nama,
+								skor: [
+									[...skornya]
+								],
+								total
+							}]
 						}
 					}
 
-					// salah
-					// if (this.listnya.length < 1) {
-					// 	console.log('Masih kosongan')
-					// 	for (let x of dataBaru){
-					// 		const skornya = x.skor.split(', ').filter(x => x).map(x => +x).sort((a, b) => b - a).slice(0, 6)
-					// 		const total = skornya.reduce((a, b) => a + b)
-					// 		this.listnya = [...this.listnya, {
-					// 			nama: x.nama,
-					// 			skor: [
-					// 				[...skornya] 
-					// 			],
-					// 			total
-					// 		}]
-					// 	}
-					// } else {
-					// 	// kalau sudah ada "listnya"
-					// }
-					// /salah
-
-					// localStorage[`listnya_${slug(judul)}`] = JSON.stringify(this.listnya)
-					// localStorage.removeItem(`tambahkan_${slug(judul)}`)
-
+					localStorage[`listnya_${slug(judul)}`] = JSON.stringify(this.listnya)
+					localStorage.removeItem(`tambahkan_${slug(judul)}`)
 				}
 			},
 			ambilListnya(){
@@ -104,6 +122,19 @@
 				if (localStorage[`pemain_${slug(judul)}`]) {
 					this.pemain = JSON.parse(localStorage[`pemain_${slug(judul)}`])
 				}
+			},
+			hapusTurnamen(){
+				Swal.fire('Hapus Turnamen ini?').then(x => {
+					if (x.isConfirmed) {
+						let dataTurnamen = JSON.parse(localStorage.dataTurnamen)
+						dataTurnamen = dataTurnamen.filter(y => y != judul)
+						localStorage.dataTurnamen = JSON.stringify(dataTurnamen)
+
+						localStorage.removeItem(`listnya_${slug(judul)}`) 
+
+						history.back()
+					}
+				})
 			}
 		}).mount('.olah-turnamen')
 	</script>
@@ -114,6 +145,10 @@
 		}
 		.olah-turnamen h1 {
 			@apply px-3 text-center py-5 uppercase text-2xl
+		}
+
+		.tampilkan-listnya {
+			@apply p-5 pt-0 -mt-5
 		}
 
 		.anggota-turnamen {
@@ -132,6 +167,10 @@
 
 		.tambahkan-skor {
 			@apply uppercase font-bold border border-black border-2 p-3 block m-5 text-center
+		}
+
+		.hapus {
+			@apply pt-5 text-red-500 cursor-pointer text-center
 		}
 	</style>
 @endsection
