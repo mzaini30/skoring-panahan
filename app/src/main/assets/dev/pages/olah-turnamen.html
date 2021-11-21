@@ -10,7 +10,7 @@
 
 		<form @submit.prevent='tambahkanPemain' class="anggota-baru-turnamen">
 			<p>Tambahkan Peserta</p>
-			<input v-model='baru' type="text" required>
+			<input v-model='baru' placeholder="Tulis di sini" type="text" required>
 		</form>
 
 		<div class="anggota-turnamen">
@@ -84,7 +84,7 @@
 							// kalau nama ada di listnyaTersimpan
 							for (let y of this.listnya){
 								if (y.nama == x.nama){
-									y.skor = [...y.skor, [...skornya]]
+									y.skor = [[...skornya], ...y.skor]
 									y.total += total
 								}
 							}
@@ -127,7 +127,7 @@
 				Swal.fire('Hapus Turnamen ini?').then(x => {
 					if (x.isConfirmed) {
 						let dataTurnamen = JSON.parse(localStorage.dataTurnamen)
-						dataTurnamen = dataTurnamen.filter(y => y != judul)
+						dataTurnamen = dataTurnamen.filter(y => y.trim() != judul)
 						localStorage.dataTurnamen = JSON.stringify(dataTurnamen)
 
 						localStorage.removeItem(`listnya_${slug(judul)}`) 
