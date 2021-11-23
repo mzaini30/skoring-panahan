@@ -10,7 +10,7 @@
 
 		<form action="" @submit.prevent='tambahkan' class="form-tambah">
 			<p>Tambahkan Turnamen</p>
-			<input type="text" v-model='baru' placeholder="Tulis di sini" required>
+			<input type="text" :value='baru' @keyup='baru = $event.target.value' placeholder="Tulis di sini" required>
 		</form>
 
 		<div class="listnya">

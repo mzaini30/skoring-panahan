@@ -11,6 +11,6 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "mini-ssg-zen": "^0.2.3"
+    "mini-ssg-zen": "^0.4.0"
   }
 }
